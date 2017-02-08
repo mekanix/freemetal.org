@@ -6,7 +6,8 @@
   "repository": "https://bitbucket.org/imagine-paul/imagine-hp",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --host 0.0.0.0 --color"
+    "start": "webpack-dev-server --inline --hot --host 0.0.0.0 --color",
+    "build": "webpack --progress --config webpack.config.prod.js"
   },
   "dependencies": {
     "autoprefixer": "^6.4.0",
