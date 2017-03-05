@@ -10,7 +10,6 @@ import Register from '../pages/register';
 import Landing from '../pages/landing';
 import Home from '../pages/home';
 import App from './app';
-import '../reset.css';
 
 
 const routes = {

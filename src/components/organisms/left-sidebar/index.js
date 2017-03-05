@@ -4,7 +4,6 @@ import LogoutIcon from 'material-ui/svg-icons/action/input';
 import Subheader from 'material-ui/Subheader';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { connect } from 'react-redux';
-import SidebarTransitionGroup from '../../molecules/sidebar-transition-group';
 import { themes } from '../../../constants';
 import actions from '../../../containers/actions';
 import './styles.css';
@@ -81,15 +80,15 @@ const LeftSidebar = React.createClass({
         <Subheader style={styles.subheader} onTouchTap={this.handleTheme}>
           Theme
         </Subheader>
-        <SidebarTransitionGroup>
+        <div>
           {this.state.selected === 'theme' ? theme : ''}
-        </SidebarTransitionGroup>
+        </div>
         <Subheader style={styles.subheader} onTouchTap={this.handleOther}>
           Other
         </Subheader>
-        <SidebarTransitionGroup>
+        <div>
           {this.state.selected === 'other' ? other : ''}
-        </SidebarTransitionGroup>
+        </div>
       </div>
     );
   },

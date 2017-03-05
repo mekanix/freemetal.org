@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Style } from 'radium';
 import Snackbar from 'material-ui/Snackbar';
 import actions from './actions';
+import reset from './reset';
 
 
 const mapStateToProps = (state) => ({
@@ -32,6 +34,7 @@ const App = React.createClass({
   render() {
     return (
       <div>
+        <Style rules={reset} />
         {this.props.children}
         <Snackbar
           open={this.props.notificationsOpen}

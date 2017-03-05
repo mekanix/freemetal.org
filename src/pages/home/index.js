@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import radium from 'radium';
 import { isLoggedIn } from '../../utils';
 import actions from './actions';
 
@@ -45,5 +44,4 @@ const Home = React.createClass({
 });
 
 
-const RadiumHome = radium(Home);
-export default connect(mapStateToProps, actions)(RadiumHome);
+export default connect(mapStateToProps, actions)(Home);
