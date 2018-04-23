@@ -1,83 +1,81 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
-import { history, errors } from '../../constants';
+import { errors } from '../../constants';
 import { isLoggedIn } from '../../utils';
 import actions from './actions';
 import styles from './styles';
 
 
-function mapStateToProps(state) {
-  return {
-    token: state.login.token,
-  };
-}
+const mapStateToProps = (state) => ({
+  token: state.login.token,
+  status: state.login.status,
+  error: state.login.error,
+});
 
 
-const Login = React.createClass({
-  propTypes: {
-    dispatch: React.PropTypes.func.isRequired,
-  },
+class Login extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  }
 
-  getDefaultProps() {
-    return {
-      loginClass: 'user',
-    };
-  },
+  static propTypes = {
+    children: PropTypes.node,
+    status: PropTypes.string,
+    error: PropTypes.string,
+    reset: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+  }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       email: '',
       password: '',
     };
-  },
+    this.handleEmailChange = (event) => {
+      this.setState({ email: event.target.value });
+    };
+
+    this.handlePasswordChange = (event) => {
+      this.setState({ password: event.target.value });
+    };
+
+    this.handleSubmit = (event) => {
+      event.preventDefault();
+      this.props.login(this.state.email, this.state.password);
+    };
+
+    this.handleNotificationClose = () => {
+      this.setState({ status: '', message: '' });
+    };
+  }
 
   componentWillMount() {
     if (isLoggedIn()) {
-      history.push('/');
+      this.context.router.history.push('/');
     }
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.status === 'error') {
       this.setState({ status: 'error', message: nextProps.error });
-      this.props.dispatch(actions.reset());
+      this.props.reset();
     }
-  },
+  }
 
   shouldComponentUpdate() {
     if (isLoggedIn()) {
-      history.push('/');
+      this.context.router.history.push('/');
       return false;
     }
     return true;
-  },
+  }
 
-  handleEmailChange(event) {
-    this.setState({ email: event.target.value });
-  },
-
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
-  },
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.dispatch(
-      actions.login(
-        this.state.email,
-        this.state.password,
-      )
-    );
-  },
-
-  handleNotificationClose() {
-    this.setState({ status: '', message: '' });
-  },
 
   render() {
     const notificationOpen = this.state.status === 'error';
@@ -86,7 +84,7 @@ const Login = React.createClass({
       <div style={styles.root}>
         <Paper zDepth={3}>
           <form style={styles.form} onSubmit={this.handleSubmit}>
-            <h1 style={styles.title}>ImagineVR</h1>
+            <h1 style={styles.title}>Login</h1>
             <div>
               <TextField
                 floatingLabelText="Email"
@@ -107,12 +105,6 @@ const Login = React.createClass({
               <RaisedButton label="login" type="submit" />
             </div>
           </form>
-          <div style={styles.register}>
-            Do not have an account?
-            <Link style={styles.register.link} to="/register">
-              Register
-            </Link>
-          </div>
         </Paper>
         <Snackbar
           open={notificationOpen}
@@ -124,8 +116,7 @@ const Login = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, actions)(Login);

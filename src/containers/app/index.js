@@ -1,53 +1,32 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Style } from 'radium';
-import Snackbar from 'material-ui/Snackbar';
-import actions from './actions';
-import reset from './reset';
+import { Switch, Route } from 'react-router-dom';
+import { DragDropContext as dndContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import reset from '../../reset.js';
+import fonts from '../../fonts/fonts.js';
+import Landing from '../../pages/landing';
+import Home from '../../pages/home';
+import Login from '../../pages/login';
+import NotFound from '../../pages/not-found';
 
 
-const mapStateToProps = (state) => ({
-  notifications: state.notifications.notifications,
-  notificationsOpen: state.notifications.open,
-});
-
-
-const App = React.createClass({
-  propTypes: {
-    children: React.PropTypes.node,
-    notifications: React.PropTypes.node,
-    notificationsOpen: React.PropTypes.bool,
-    close: React.PropTypes.func.isRequired,
-    setBackendUrl: React.PropTypes.func.isRequired,
-  },
-
-  componentWillMount() {
-    // eslint-disable-next-line no-undef
-    const hostname = window.location.hostname;
-    this.props.setBackendUrl(hostname);
-  },
-
-  handleNotificationClose() {
-    this.props.close();
-  },
-
+class App extends React.Component {
   render() {
     return (
       <div>
+        <Style rules={fonts} />
         <Style rules={reset} />
-        {this.props.children}
-        <Snackbar
-          open={this.props.notificationsOpen}
-          message={this.props.notifications}
-          autoHideDuration={5000}
-          action="close"
-          onActionTouchTap={this.handleNotificationClose}
-          onRequestClose={this.handleNotificationClose}
-        />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/landing" component={Landing} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </div>
     );
-  },
-});
+  }
+}
 
 
-export default connect(mapStateToProps, actions)(App);
+export default dndContext(HTML5Backend)(App);

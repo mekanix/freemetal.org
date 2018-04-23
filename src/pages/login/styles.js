@@ -21,13 +21,7 @@ export default {
     textAlign: 'center',
     fontFamily: 'inherit',
   },
-
-  register: {
-    textAlign: 'center',
-    fontFamily: 'inherit',
-    padding: '20px 50px',
-    link: {
-      color: 'black',
-    },
-  },
 };
+
+
+

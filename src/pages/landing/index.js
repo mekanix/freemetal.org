@@ -1,34 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Layout from '../../components/layouts/layout';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Paper from 'material-ui/Paper'
+import Template from '../../templates/default'
+import getStyles from './styles'
 
 
-const mapStateToProps = (state) => ({
-  theme: state.theme.theme,
-});
-
-
-const Landing = React.createClass({
-  propTypes: {
-    theme: React.PropTypes.object.isRequired,
-  },
-
-  contextTypes: {
-    router: React.PropTypes.object.isRequired,
-  },
-
-  handleLogin() {
-    this.context.router.push('/login');
-  },
-
+class Landing extends React.Component {
   render() {
+    const styles = getStyles(this.context.muiTheme)
     return (
-      <Layout>
-        Landing Page
-      </Layout>
-    );
-  },
-});
+      <Template>
+        <Paper style={styles.content}>
+          Landing
+        </Paper>
+      </Template>
+    )
+  }
+}
 
 
-export default connect(mapStateToProps)(Landing);
+Landing.contextTypes = {
+  muiTheme: PropTypes.object.isRequired,
+}
+
+
+export default Landing

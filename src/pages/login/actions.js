@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
-import { fetch } from '../../utils';
+import { fetch, tokenName } from '../../utils';
+import { apiUrl } from '../../constants';
 import LOGIN from './constants';
 
 
@@ -12,8 +13,7 @@ const begin = createAction(LOGIN, () => ({
 }));
 
 const success = createAction(LOGIN, json => {
-  // eslint-disable-next-line no-undef
-  window.localStorage.ImagineVRAuthToken = json.token;
+  window.localStorage[tokenName] = json.token;
   return {
     token: json.token,
     status: 'success',
@@ -27,9 +27,8 @@ const fail = createAction(LOGIN, error => ({
 
 
 const login = (email, password) =>
-  (dispatch, getState) => {
+  (dispatch) => {
     dispatch(begin());
-    const apiUrl = getState().backend.apiUrl;
     fetch({
       url: `${apiUrl}/auth/tokens`,
       body: {
