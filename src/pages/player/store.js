@@ -6,12 +6,20 @@ export default class PlayerStore {
     this.detail = detail[0]
     this.setDetail = detail[1]
     stream.volume = this.detail.volume
+    stream.onplay = this.readMetadata
     this.stream = stream
   }
 
   setVolume = (volume) => {
     this.stream.volume = volume
     this.setDetail({ ...this.detail, volume })
+  }
+
+  readMetadata = () => {
+    if (this.stream.mozGetMetadata) {
+      const meta = this.stream.mozGetMetadata()
+      this.setDetail({ ...this.detail, ...meta })
+    }
   }
 
   play = () => {

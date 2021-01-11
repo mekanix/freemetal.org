@@ -27,7 +27,7 @@ class PlayerBar extends React.Component {
         <IconButton onClick={this.toggle}>
           {playbackIcon}
         </IconButton>
-        Artist - Song Title
+        {player.detail.ARTIST} - {player.detail.TITLE}
       </div>
     )
   }
