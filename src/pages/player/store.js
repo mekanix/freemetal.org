@@ -1,4 +1,4 @@
-const stream = new Audio('https://stream.freemetal.org/')
+const stream = new Audio('/stream')
 
 
 export default class PlayerStore {
@@ -6,7 +6,7 @@ export default class PlayerStore {
     this.detail = detail[0]
     this.setDetail = detail[1]
     stream.volume = this.detail.volume
-    stream.onplay = this.readMetadata
+    stream.onplaying = this.readMetadata
     this.stream = stream
   }
 
