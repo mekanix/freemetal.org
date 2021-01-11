@@ -3,8 +3,10 @@ const initial = {
     ARTIST: '',
     TITLE: '',
     ALBUM: '',
+
     muted:false,
     playing: false,
+    ready: false,
     volume: 1,
   },
 }

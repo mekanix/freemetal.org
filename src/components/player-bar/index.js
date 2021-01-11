@@ -22,12 +22,15 @@ class PlayerBar extends React.Component {
   render() {
     const { player } = this.props.store
     const playbackIcon = player.detail.playing ? <StopIcon /> : <PlayIcon />
+    const title = player.detail.ARTIST
+      ? `${player.detail.ARTIST} - ${player.detail.TITLE}`
+      : ''
     return (
       <div style={styles.root}>
-        <IconButton onClick={this.toggle}>
+        <IconButton onClick={this.toggle} disabled={!player.detail.ready}>
           {playbackIcon}
         </IconButton>
-        {player.detail.ARTIST} - {player.detail.TITLE}
+        {title}
       </div>
     )
   }
