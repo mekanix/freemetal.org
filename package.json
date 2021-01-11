@@ -22,6 +22,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "http-proxy-middleware": "^1.0.5",
     "jest-enzyme": "^7.1.2",
+    "jest-junit": "^12.0.0",
     "react-test-renderer": "^16.13.1",
     "regenerator-runtime": "^0.13.7"
   },
@@ -36,10 +37,16 @@
       "!src/setupProxy.js"
     ]
   },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "outputDirectory": ".",
+    "outputName": "junit.xml",
+    "uniqueOutputName": "false"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --testResultsProcessor=jest-junit --color --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

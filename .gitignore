@@ -25,3 +25,4 @@ project.mk
 templates/fstab
 vars.mk
 yarn-error.log
+junit.xml
