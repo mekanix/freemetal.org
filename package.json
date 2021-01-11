@@ -1,36 +1,61 @@
 {
-  "name": "materialui-startkit",
-  "version": "0.1.0",
+  "name": "create-freenit",
+  "version": "0.0.4",
+  "private": false,
   "dependencies": {
-    "material-ui": "^0.20.0",
-    "radium": "^0.24.0",
-    "react": "^16.3.2",
-    "react-dnd": "^2.6.0",
-    "react-dnd-html5-backend": "^2.6.0",
-    "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.4",
-    "react-tap-event-plugin": "^3.0.2",
-    "redux": "^4.0.0",
-    "redux-actions": "^2.3.0",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0"
+    "axios": "^0.21.1",
+    "freenit": "^0.0.25",
+    "prop-types": "^15.7.2",
+    "radium": "^0.26.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "http-proxy-middleware": "^1.0.5",
+    "jest-enzyme": "^7.1.2",
+    "react-test-renderer": "^16.13.1",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!src/**/{mock,service,styles}.js",
+      "!src/{pages,templates}/*/{index,initial}.js",
+      "!src/{App,index,theme}.js",
+      "!src/serviceWorker.js",
+      "!src/setupProxy.js"
+    ]
   },
   "scripts": {
-    "prestart": "bin/setup.sh start",
     "start": "react-scripts start",
-    "prebuild": "bin/setup.sh build",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    },
-    "/swaggerui": {
-      "target": "http://localhost:5000"
-    }
-  }
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "bin": "create-freenit"
 }

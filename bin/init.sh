@@ -1,6 +1,8 @@
 #!/bin/sh
 
-BIN_DIR=`dirname $0`
-PROJECT_ROOT=`readlink -f "${BIN_DIR}/.."`
 
-cd ${PROJECT_ROOT}
+export OFFLINE=${OFFLINE:=no}
+BIN_DIR=`dirname $0`
+. ${BIN_DIR}/common.sh
+
+setup

@@ -1,58 +1,59 @@
-import isomorphicFetch from 'isomorphic-fetch';
+import axios from 'axios'
 
 
-export const tokenName = 'auth';
+export const API_ROOT = '/api/v0'
 
 
-export function getAuthToken() {
-  if (!window.localStorage[tokenName]) {
-    return undefined;
-  }
-  return window.localStorage[tokenName];
+export const rest = axios.create({
+  baseURL: API_ROOT,
+  withCredentials: true,
+})
+
+rest.interceptors.request.use(
+  (config) => {
+    const csrfType = config.url === '/auth/refresh'
+      ? 'csrf_refresh_token'
+      : 'csrf_access_token'
+    const csrf = getCookie(csrfType)
+    config.headers.withCredentials = true
+    if (csrf) {
+      config.headers['X-CSRF-TOKEN'] = csrf
+    }
+    return config
+  },
+
+  (err) => {
+    return Promise.reject(err)
+  },
+)
+
+
+export const getCookie = (name) => {
+  var value = "; " + document.cookie
+  var parts = value.split("; " + name + "=")
+  if (parts.length === 2) return parts.pop().split(";").shift()
 }
 
 
-export function isLoggedIn() {
-  return Boolean(getAuthToken());
-}
-
-
-export function requireAuth(nextState, replace) {
-  if (!isLoggedIn()) {
-    replace('/landing');
+export const errors = (response) => {
+  const data = response.response && response.response.data
+    ? response.response.data
+    : {}
+  if (!data.message) {
+    if (data.msg) {
+      data.message = data.msg
+    } else if (data.statusText) {
+      data.message = data.statusText
+    } else if (data.status) {
+      data.message = data.status
+    }
   }
-}
-
-
-export function fetch(args) {
-  const {
-    url,
-    body,
-    method,
-  } = args;
-  const newbody = JSON.stringify(body);
-  const newargs = {
-    body: newbody,
-    method: method || 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `JWT ${getAuthToken()}`,
-    },
-  };
-  if (!isLoggedIn()) {
-    delete newargs.headers.Authorization;
-  }
-  if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
-    newargs.headers['Content-Type'] = 'application/json';
-  }
-  return isomorphicFetch(url, newargs)
-    .then(response => {
-      const json = response.json();
-      if (response.status >= 400) {
-        const error = new Error(response.statusText);
-        error.response = response;
-        throw error;
+  if (data.errors){
+    Object.getOwnPropertyNames(data.errors).forEach(property => {
+      if (property !== 'message') {
+        data.errors[property] = data.errors[property].join(' ')
       }
-      return json;
-    });
+    })
+  }
+  return data
 }

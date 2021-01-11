@@ -1,13 +1,9 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/build
+node_modules
+coverage
+build
 
 # misc
 .DS_Store
@@ -16,7 +12,16 @@
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-src/env.js
+cbsd.conf
+ansible/group_vars/all
+ansible/inventory/inventory
+ansible/roles/*
+!ansible/roles/.keep
+!ansible/roles/devel
+ansible/site.yml
+project.conf
+site.retry
+project.mk
+templates/fstab
+vars.mk
+yarn-error.log
