@@ -12,5 +12,5 @@ it('landing', async () => {
     )
   })
   let title = wrapper.find('a[data-id="app"]')
-  expect(title.text()).toEqual('Freenit')
+  expect(title.text()).toEqual('Free Metal')
 })
