@@ -9,7 +9,7 @@ class RoleList extends React.Component {
   render() {
     return (
       <Template secure style={{}}>
-        <Role.list {...this.props} />
+        <Role.List {...this.props} />
       </Template>
     )
   }

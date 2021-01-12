@@ -1,7 +1,7 @@
 // import background from 'background.png'
 
 
-export default {
+const styles = {
   body: {
     margin: 0,
     padding: 0,
@@ -17,3 +17,6 @@ export default {
     'color': 'inherit',
   },
 }
+
+
+export default styles

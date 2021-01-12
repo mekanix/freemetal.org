@@ -9,7 +9,7 @@ class UserDetail extends React.Component {
   render() {
     return (
       <Template secure style={{}}>
-        <User.detail {...this.props} />
+        <User.Detail {...this.props} />
       </Template>
     )
   }

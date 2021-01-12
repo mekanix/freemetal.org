@@ -1,6 +1,9 @@
 import detail from './detail'
 
 
-export default {
+const dashboard = {
   detail,
 }
+
+
+export default dashboard

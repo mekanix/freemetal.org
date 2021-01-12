@@ -9,7 +9,7 @@ class UserList extends React.Component {
   render() {
     return (
       <Template secure style={{}}>
-        <User.list {...this.props} />
+        <User.List {...this.props} />
       </Template>
     )
   }

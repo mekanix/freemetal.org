@@ -9,7 +9,7 @@ class RoleDetail extends React.Component {
   render() {
     return (
       <Template secure style={{}}>
-        <Role.detail {...this.props} />
+        <Role.Detail {...this.props} />
       </Template>
     )
   }

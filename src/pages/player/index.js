@@ -3,8 +3,11 @@ import initial from './initial'
 import store from './store'
 
 
-export default {
+const player = {
   Detail,
   initial,
   store,
 }
+
+
+export default player
