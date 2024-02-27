@@ -7,7 +7,7 @@
   let play = writable('play')
   let icon = writable(mdiPlay)
 
-  const player = new IcecastMetadataPlayer("https://freemetal.org/stream", {
+  const player = new IcecastMetadataPlayer("/stream", {
     onMetadata: (meta) => {
       if (meta.ARTIST && meta.TITLE) {
         $song = `${meta.ARTIST} - ${meta.TITLE}`
@@ -32,58 +32,64 @@
 </script>
 
 <div class="root">
-  <h1 class="XzPsdHAE">
-    Free Metal
-  </h1>
-  <p class="Onjkghri">
-    Music under Creative Commons license.
-  </p>
-</div>
-<div class="nGUggimk">
-  <div class="SqoxWuhX">
-    <button on:click={toggle}>
-      <svg class="AGVZBFJe">
-        <path d={$icon} />
-      </svg>
-    </button>
+  <div class="content">
+    <h1 class="title">
+      Free Metal
+    </h1>
+    <p class="Onjkghri">
+      Music under Creative Commons license.
+    </p>
   </div>
-  <div class="AeBkPuwl">
-      <span class="EBNiZXFq">
-        {$song}
-      </span>
+  <div class="player">
+    <div class="play">
+      <button on:click={toggle}>
+        <svg class="icon">
+          <path d={$icon} />
+        </svg>
+      </button>
+    </div>
+    <div class="meta">
+      <span>{$song}</span>
+    </div>
   </div>
 </div>
 
 <style>
   .root {
-    padding: 10px;
-    height: calc(100vh - 50px);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
   }
 
-  .XzPsdHAE {
+  .content {
+    flex: 1;
+    padding: 10px;
+  }
+
+  .title {
     text-align: center;
   }
 
-  .nGUggimk {
+  .player {
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: stretch;
   }
 
-  .SqoxWuhX {
+  .play {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
   }
 
-  .AGVZBFJe {
+  .icon {
     width: 30px;
     height: 30px;
   }
 
-  .AeBkPuwl {
+  .meta {
     flex: 1;
     display: flex;
     align-items: center;

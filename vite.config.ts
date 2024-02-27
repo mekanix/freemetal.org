@@ -10,7 +10,7 @@ const config = defineConfig({
 if (process.env.BACKEND_URL) {
   config.server = {
     proxy: {
-      '/api': {
+      '/stream': {
         target: process.env.BACKEND_URL,
         changeOrigin: true,
       },

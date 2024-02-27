@@ -21,6 +21,7 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/eslint": "8.56.0",
+    "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@zerodevx/svelte-toast": "^0.9.5",
@@ -41,7 +42,5 @@
   "type": "module",
   "overrides": {
     "rollup": "npm:@rollup/wasm-node"
-  },
-  "dependencies": {
   }
 }
